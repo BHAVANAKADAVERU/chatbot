@@ -84,5 +84,41 @@
       <img src="legal_rights_image.jpg" alt="Legal Rights Image" style="max-width: 100%; height: auto;">
     </div>
   </footer>
+
+  <script>
+        <script>
+        document.getElementById('messageForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('messageInput').value.trim();
+            if (messageInput) {
+                displayMessage(`User: ${messageInput}`);
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/api/messages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            type: 'message',
+                            text: messageInput
+                        })
+                    });
+                    const data = await response.json();
+                    displayMessage(`Bot: ${data.text}`);
+                } catch (error) {
+                    console.error('Error:', error);
+                    displayMessage('Error: Failed to send message');
+                }
+            }
+        });
+
+        function displayMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+        }
+    </script>
+  </script>
 </body>
 </html>
