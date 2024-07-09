@@ -9,7 +9,7 @@ const cors = require('cors');  // Add this line
 dotenv.config();
 
 // Construct the correct path to the JSON file
-const jsonFilePath = path.join(__dirname, 'constitution_of_india.json');
+const jsonFilePath = path.join(__dirname, 'constitution.json');
 
 // Initialize variables for bot and QA data
 let qaData = [];
