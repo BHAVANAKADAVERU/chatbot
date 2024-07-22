@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 10px; 
+    text-align: center;
+    background-color:rgb(74, 235, 168);
+    box-sizing:border-box;
+    width:100%;
+    height:100%;
+    color:blue;
+    padding:10px;
+}
+
+.container{
+   
+    text-align: center;
+    background-color: #cccccc;
+    padding: 20px;
+    box-shadow: 0 50px 50px #989c9c;
+    letter-spacing: 1px;
+    width:30%;
+    height:10%;
+    margin:auto;
+    padding:10px;
+    margin-top:10px;
+    margin-bottom:10px;
+
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>LOGIN FORM</h2>
+            <form action="#">
+                <!-- Your form fields go here -->
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" placeholder="enter email" name="email"  autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="enter password" name="password"  autocomplete="off">
+                </div>
+                <div class="text-center">
+                    <button type="button" onclick="saveData()" class="btn btn-primary" id="save-btn">SUBMIT</button>
+                </div>
+                <p>Not have an account?</p>
+                <a href="reg.html">REGISTER</a>
+            </form>
+        </div>
+    </div>
+<script>
+
+function saveData() {
+            // Your login logic goes here
+            let email,password;
+            const admin=document.getElementById('email').value;
+            const adminpass=document.getElementById('password').value;
+            email=document.getElementById("email").value;
+            password=document.getElementById("password").value;
+
+
+            let user_record=new Array();
+            user_record=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+
+            if(user_record.some((v)=>{
+                return v.email == email && v.password == password
+
+            })){
+                alert("LOGIN SUCCESSFUL");
+               
+                let current_user=user_record.filter((v)=>{
+                    return v.email == email && v.password == password
+                })[0]
+
+                localStorage.setItem("name",current_user.name);
+                localStorage.setItem("email",current_user.email);
+               
+                window.location.href="main.html";
+
+            }
+            
+       else if (admin === "admin@gmail.com" && adminpass==="admin123") {
+        window.location.href="adminpanel.html";
+       } else {
+        alert('invalid credentails');
+       }
+    
+}
+
+
+    </script>
+</body>
+</html>
